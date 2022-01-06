@@ -8,7 +8,7 @@ const voo= async (req, res) => {
         const sql= 'select * from vooagendados;'
         const data= await db.query(sql)
         const vooagendados= data.rows
-
+        
         res.json(vooagendados)
 
      } catch (error) {
@@ -53,9 +53,38 @@ const agendarVoo= async (req, res) => {
        }
 } 
 
+// atualizar Put
+const editarDadosVoos= async (req, res) => {
+   
+    try {
+
+        const { id }= req.params
+        const sql= `update vooagendados 
+        set cidadedepartida = '${req.body.cidadedepartida}',
+         cidadedestino = '${req.body.cidadedestino}',  
+         companhiaaerea = '${req.body.companhiaaerea}'
+         where id = ${id}`
+    
+        const data= await db.query(sql)
+        const {...edit}= data.rows
+        
+        if(edit){
+                 res.json({
+                 message: 'dados atualizados com sucesso!', 
+                 news : edit
+          })
+        }
+        
+    } catch (error) {
+        console.error('Erro na alualização: '+ error)
+    }
+
+} 
+
 
 module.exports= {
     voo,
     voosDePartida,
-    agendarVoo
+    agendarVoo,
+    editarDadosVoos
 }
