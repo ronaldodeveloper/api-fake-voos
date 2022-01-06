@@ -7,12 +7,12 @@ const endpoint= require('./routers/router')
 app.use(express.json())
 
 // Endpoint
-app.use('/', endpoint);
+app.use('/api', endpoint);
 
 app.listen(port,(err)=>{
     if(!err){
         console.log('Connection success!')
     }else{
-        throw err
+        console.log(`erro: ${err.message}`)
     }
 })

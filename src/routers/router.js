@@ -1,8 +1,12 @@
-const express = require('express');
-const router= express.Router();
-const { voo }= require('../services/consultarVoo')
+const router= require('express').Router();
+// const router= express;
+const { voo, voosDePartida, agendarVoo }= require('../services/consultarVoo')
 
-router.get('/', voo)
+// GET
+router.get('/todos-os-voos', voo)
+router.get('/voos-de-partida', voosDePartida)
 
+// POST
+router.post('/agendar-voo', agendarVoo)
 
 module.exports= router;
