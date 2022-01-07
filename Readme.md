@@ -11,12 +11,14 @@
 
 ### Estrutura do projeto
     root
-        |_/ src
-              |_/ controller 
-                           |_ 
-              |_/ model 
-              |_/ router 
-              |_/ services 
+        |__ src
+              |_ model 
+              |        |_ ...database access...        
+              |_ router 
+              |        |_ ...routers...
+              |_ services 
+                       |_ ...logic businnes...
+
 <br/>
 
 ### APIs endpoint
