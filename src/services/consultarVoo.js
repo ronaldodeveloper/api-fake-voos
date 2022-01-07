@@ -1,3 +1,6 @@
+/*
+ * >>>>>>>>>> SERVICES Layer 
+*/
 
 const db= require('../model/database/dbConnection')
 
@@ -36,7 +39,9 @@ const voosDePartida= async (req, res) => {
 // agendar voos
 const agendarVoo= async (req, res) => {
    
-       const sql= 'insert into vooagendados (cidadedepartida, cidadedestino, datahora, companhiaaerea) values ($1,$2,$3,$4)'
+       const sql= `insert into vooagendados 
+       (cidadedepartida, cidadedestino, datahora, companhiaaerea) 
+       values ($1,$2,$3,$4)`
        const insert= [
              `${req.body.cidadedepartida}`,
              `${req.body.cidadedestino}`,
@@ -73,18 +78,36 @@ const editarDadosVoos= async (req, res) => {
                  message: 'dados atualizados com sucesso!', 
                  news : edit
           })
-        }
-        
+        }       
     } catch (error) {
         console.error('Erro na alualização: '+ error)
     }
 
 } 
 
+// Delete
+const deletarDadosVoos= async (req, res) => {
+   
+    try {
+
+        const { id }= req.params
+        const sql= `delete from vooagendados where id = '${id}'`
+        const data= await db.query(sql)
+        res.json({
+            status: `voo cancelado`,
+            voo: `${id}`
+        })     
+        
+    } catch (error) {
+        console.error('Erro na alualização: '+ error)
+    }
+
+}
 
 module.exports= {
     voo,
     voosDePartida,
     agendarVoo,
-    editarDadosVoos
+    editarDadosVoos,
+    deletarDadosVoos
 }
